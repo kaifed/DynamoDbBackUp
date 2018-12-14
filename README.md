@@ -17,14 +17,15 @@ It can be used independently and as a dependency in your code.
 ## Usage samples
 ### Full backup
 ```bash
-$ gulp backup-full --s3bucket <bucket> --s3prefix <prefix> --s3region <region> --dbtable <table> --dbregion <region>
+$ gulp backup-full --s3bucket <bucket> --s3prefix <prefix> --s3region <region> --dbtable <table> --dbregion <region> --limit <limit>
 Options:
   --s3bucket      (required)  Amazon S3 backup bucket name
-  --s3prefix      (optional)  subfolder for backup (recommend use AWS DynamoDb table name)
+  --s3prefix      (required)  subfolder for backup (recommend use AWS DynamoDb table name)
   --s3encryption  (optional)  AES256 (default) or aws:kms
   --s3region      (required)  AWS Region for Amazon S3 backup bucket
   --dbtable       (required)  AWS DynamoDb table name
   --dbregion      (required)  AWS Region for AWS DynamoDb table
+  --limit         (optional)  Percentage limit of total read units to use. Default to 25% for no value or value > 1.
 ```
 
 ```javascript

@@ -47,15 +47,19 @@ gulp.task('backup-incremental', (cb) => {
 });
 
 gulp.task('backup-full', (cb) => {
+    if (argv.limit > 1) {
+        console.log("Limit is a percent ex. 0.25. Value entered is invalid. Defaulting to 25%.");
+        argv.limit = 0.25;
+    }
     let config = {
         S3Bucket: argv.s3bucket,
         S3Prefix: argv.s3prefix,
         S3Encryption: argv.s3encryption,
         S3Region: argv.s3region,
         DbTable: argv.dbtable,
-        DbRegion: argv.dbregion
+        DbRegion: argv.dbregion,
+        Limit: argv.limit || 0.25
     };
-
     let backup = new Backup(config);
     backup.full()
         .then((r) => {
